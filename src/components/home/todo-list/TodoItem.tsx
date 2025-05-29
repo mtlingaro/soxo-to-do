@@ -12,9 +12,10 @@ import { Todo } from '@models/todo';
 
 type TodoItemProps = {
   todo: Todo;
-  onToggle: (id: number, completed: boolean) => void;
+  onToggleAction: () => void;
 };
-export const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggle }) => {
+
+export const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggleAction }) => {
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
@@ -23,20 +24,16 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggle }) => {
     return () => clearTimeout(timer);
   }, [todo.completed]);
 
-  const handleToggle = () => {
-    onToggle(todo.id, !todo.completed);
-  };
-
   return (
     <ListItem disablePadding className={isAnimating ? 'fade-in' : ''}>
-      <ListItemButton role={undefined} dense onClick={handleToggle}>
+      <ListItemButton role={undefined} dense onClick={onToggleAction}>
         <ListItemIcon>
           <Checkbox
             edge="start"
             checked={todo.completed}
             tabIndex={-1}
             disableRipple
-            onChange={handleToggle}
+            onChange={onToggleAction}
           />
         </ListItemIcon>
         <ListItemText

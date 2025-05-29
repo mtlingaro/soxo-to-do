@@ -1,20 +1,11 @@
 'use client';
 
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 import { ReactNode } from 'react';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#3f51b5',
-    },
-    secondary: {
-      main: '#f50057',
-    },
-  },
-});
+import { theme } from '@styles/theme';
 
 export const ClientThemeProvider = ({ children }: { children: ReactNode }) => {
   return (

@@ -1,28 +1,19 @@
-'use client';
-
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { useState } from 'react';
-
-import { TodoList, Filters } from '@components/todo-list';
-import { LoadingSpinner, ErrorMessage } from '@components/ui';
-
-import { useTodos } from '@hooks/use-todos';
+import { TodoList, Filters } from '@components/home';
 
 import { FilterType } from '@models/todo';
 
-export default function Home() {
-  const [filter, setFilter] = useState<FilterType>('all');
-  const { todos, isLoading, error, toggleTodo } = useTodos();
-
-  const handleFilterChange = (newFilter: FilterType) => {
-    setFilter(newFilter);
+interface IProps {
+  searchParams?: {
+    filter?: FilterType;
   };
+}
 
-  if (isLoading) return <LoadingSpinner />;
-  if (error) return <ErrorMessage message={error.message} />;
+export default async function Home({ searchParams }: IProps) {
+  const { filter = 'all' } = (await searchParams) ?? {};
 
   return (
     <Container maxWidth="sm" sx={{ py: 4 }}>
@@ -31,10 +22,10 @@ export default function Home() {
       </Typography>
 
       <Box sx={{ my: 3 }}>
-        <Filters currentFilter={filter} onFilterChange={handleFilterChange} />
+        <Filters filter={filter} />
       </Box>
 
-      <TodoList todos={todos} filter={filter} onToggle={toggleTodo} />
+      <TodoList />
     </Container>
   );
 }
