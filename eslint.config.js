@@ -57,8 +57,6 @@ export default [
             { pattern: 'react', group: 'external', position: 'before' },
             { pattern: 'next/**', group: 'external', position: 'before' },
             { pattern: '@components/**', group: 'internal', position: 'after' },
-            { pattern: '@hooks/**', group: 'internal', position: 'after' },
-            { pattern: '@libs/**', group: 'internal', position: 'after' },
             { pattern: '@models/**', group: 'internal', position: 'after' },
             { pattern: '@styles/**', group: 'internal', position: 'after' },
           ],
